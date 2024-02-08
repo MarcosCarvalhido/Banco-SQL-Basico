@@ -4,27 +4,22 @@ using static Banco_Arquivo.CrudDb;
 namespace Banco_Arquivo {
     public class Crud {
 
-        public static void IncluirConta(List<Conta> contas) {
+        public static void IncluirConta() {
 
-            int id = LerId();
-            Conta conta = PesquisarConta(id, contas);
-            if (conta != null) {
-                Console.WriteLine("Erro: id já existe");
-                return;
-            }
             string nome = LerNome();
             double saldo = LerSaldo();
-            contas.Add(new Conta(id, nome, saldo));
+
+            Incluir(nome, saldo);
         }
 
-        public static void ExcluirConta(List<Conta> contas) {
+        public static void ExcluirConta() {
 
-            if (ListaVazia(contas)) {
+            if (ContasVazia()) {
                 Console.WriteLine("Lista de contas vazia");
                 return;
             }
             int id = LerId();
-            Conta conta = PesquisarConta(id, contas);
+            Conta conta = ConsultarConta(id);
             if (conta == null) {
                 Console.WriteLine("Erro: conta não existe");
                 return;
@@ -33,23 +28,24 @@ namespace Banco_Arquivo {
                 Console.WriteLine("Erro: saldo maior que zero");
                 return;
             }
-            contas.Remove(conta);
+            Excluir(conta.Id);
         }
 
 
-        public static void AlterarConta(List<Conta> contas) {
+        public static void AlterarConta() {
 
-            if (ListaVazia(contas)) {
+            if (ContasVazia()) {
                 Console.WriteLine("Lista de contas vazia");
                 return;
             }
             int id = LerId();
-            Conta conta = PesquisarConta(id, contas);
+            Conta conta = ConsultarConta(id);
             if (conta == null) {
                 Console.WriteLine("Erro: conta não existe");
                 return;
             }
             RealizarOperacao(conta);
+            Alterar(conta);
         }
 
         public static void RealizarOperacao(Conta conta) {
@@ -92,18 +88,6 @@ namespace Banco_Arquivo {
             }
         }
 
-        public static void ConsultarConta(int id, List<Conta> contas) {
-
-            if (ListaVazia(contas)) {
-                Console.WriteLine("Lista de contas vazia");
-                return;
-            }
-            Conta conta = PesquisarConta(id, contas);
-            if (conta == null) {
-                Console.WriteLine("Erro: conta não existe");
-                return;
-            }
-            Console.WriteLine(conta);
-        }
+      
     }
 }

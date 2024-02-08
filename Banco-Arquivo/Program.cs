@@ -11,9 +11,9 @@ namespace Banco_Arquivo {
             int opcao = EntrarOpcao();
             while (opcao != FIM) {
                 switch (opcao) {
-                    //case 1: IncluirConta(contas); break;
-                    //case 2: AlterarConta(contas); break;
-                    //case 3: ExcluirConta(contas); break;
+                     case 1: IncluirConta(); break;
+                    case 2: AlterarConta(); break;
+                    case 3: ExcluirConta(); break;
                     case 4: ConsultarContas(); break;
                 }
                 opcao = EntrarOpcao();
